@@ -33,11 +33,17 @@ After predicting the medicine, it displays additional details like disease, dosa
 ## 📂 Project Structure
 AI-Prescription-Analyzer/
 │
+
 ├── app.py # Main Streamlit app
+
 ├── medicine_database.csv # Medicine details dataset
+
 ├── model/
+
 │ ├── prescription_model.keras # Trained AI model
+
 │ └── classes.npy # Class labels
+
 
 ---
 

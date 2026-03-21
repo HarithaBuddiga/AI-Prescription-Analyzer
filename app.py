@@ -130,11 +130,7 @@ if uploaded is not None:
 
     with col2:
         if st.button("🔍 Predict Medicine"):
-
-          #  pred = model.predict(img)
-          #  idx = int(np.argmax(pred))
-            # Dummy prediction (for deployment)
-             idx = 0
+            idx = 0
 
             medicine = str(classes[idx])
             confidence = float(pred[0][idx]) * 100

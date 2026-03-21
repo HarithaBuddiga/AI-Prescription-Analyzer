@@ -1,4 +1,5 @@
 import streamlit as st
+import tensorflow as tf
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -20,14 +21,17 @@ st.set_page_config(
 # Sidebar
 # -----------------------------
 st.sidebar.title("🩺 AI Prescription Analyzer")
+
 st.sidebar.info(
 """
 Upload a prescription image and the AI model
 will predict the medicine and show details.
 """
 )
+
 st.sidebar.markdown("### Supported Formats")
 st.sidebar.write("• JPG\n• JPEG\n• PNG")
+
 st.sidebar.markdown("---")
 st.sidebar.caption("AI Based Medical Assistant")
 
@@ -38,14 +42,25 @@ st.markdown(
     "<h1 style='text-align:center; color:#4CAF50;'>🩺 AI Prescription Analyzer</h1>",
     unsafe_allow_html=True
 )
+
 st.markdown("Upload a **prescription image** and get medicine details.")
 st.markdown("---")
 
 # -----------------------------
 # Paths
 # -----------------------------
+MODEL_PATH = "model/prescription_model.keras"
 CLASSES_PATH = "model/classes.npy"
 CSV_PATH = "medicine_database.csv"
+
+# -----------------------------
+# Load Model
+# -----------------------------
+if not os.path.exists(MODEL_PATH):
+    st.error("❌ Model file not found")
+    st.stop()
+
+model = tf.keras.models.load_model(MODEL_PATH)
 
 # -----------------------------
 # Load Classes
@@ -68,6 +83,7 @@ medicine_df["medicine"] = medicine_df["medicine"].str.lower()
 
 # Convert CSV → Dictionary
 PRESCRIPTION_DB = {}
+
 for _, row in medicine_df.iterrows():
     PRESCRIPTION_DB[row["medicine"]] = {
         "disease": row["disease"],
@@ -99,6 +115,7 @@ st.markdown("---")
 # Image Processing
 # -----------------------------
 if uploaded is not None:
+
     image = Image.open(uploaded).convert("RGB")
 
     col1, col2 = st.columns(2)
@@ -106,7 +123,7 @@ if uploaded is not None:
     with col1:
         st.image(image, caption="Uploaded Image", use_container_width=True)
 
-    # Preprocess (dummy)
+    # Preprocess
     img = image.resize((128, 128))
     img = np.array(img) / 255.0
     img = np.expand_dims(img, axis=0)
@@ -115,6 +132,7 @@ if uploaded is not None:
         if st.button("🔍 Predict Medicine"):
             pred = model.predict(img)
             idx = int(np.argmax(pred))
+
             medicine = str(classes[idx])
             confidence = float(pred[0][idx]) * 100
 
@@ -122,7 +140,7 @@ if uploaded is not None:
             st.info(f"📊 Confidence: {confidence:.2f}%")
 
             # -----------------------------
-            # SMART MATCHING LOGIC
+            # 🔥 SMART MATCHING LOGIC
             # -----------------------------
             details = None
             medicine_clean = medicine.lower().replace("-", " ").strip()
@@ -132,6 +150,7 @@ if uploaded is not None:
 
             for key in PRESCRIPTION_DB:
                 key_clean = key.lower().replace("-", " ").strip()
+
                 score = difflib.SequenceMatcher(None, medicine_clean, key_clean).ratio()
 
                 if score > highest_score:
@@ -165,7 +184,7 @@ if uploaded is not None:
 st.markdown("---")
 st.markdown("### 🤖 Features")
 st.write("✔ AI-based medicine prediction")
-st.write("✔ CSV-based medicine database")
+st.write("✔ CSV-based medicine database (80+ medicines)")
 st.write("✔ Smart matching system")
 
 st.warning("⚠ For educational purposes only. Consult a doctor.")

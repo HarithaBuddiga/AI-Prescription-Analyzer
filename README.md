@@ -83,8 +83,9 @@ cd AI-Prescription-Analyzer
 Step 2: Run the application
 python -m streamlit run app.py
 
-# AI Prescription Analyzer
 
-🔗 Live App: https://ai-prescription-analyzer.onrender.com
+# 🩺 **AI Prescription Analyzer**
 
-This project predicts medicines from prescription images and shows details.
+🚀 **Live Demo:** https://ai-prescription-analyzer.onrender.com
+
+AI-based system to predict medicines from prescription images.

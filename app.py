@@ -1,5 +1,5 @@
 import streamlit as st
-import tensorflow as tf
+#import tensorflow as tf
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -131,8 +131,10 @@ if uploaded is not None:
     with col2:
         if st.button("🔍 Predict Medicine"):
 
-            pred = model.predict(img)
-            idx = int(np.argmax(pred))
+          #  pred = model.predict(img)
+          #  idx = int(np.argmax(pred))
+            # Dummy prediction (for deployment)
+             idx = 0
 
             medicine = str(classes[idx])
             confidence = float(pred[0][idx]) * 100

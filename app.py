@@ -106,7 +106,7 @@ if uploaded is not None:
     with col1:
         st.image(image, caption="Uploaded Image", use_container_width=True)
 
-    # Preprocess (kept for structure)
+    # Preprocess (dummy)
     img = image.resize((128, 128))
     img = np.array(img) / 255.0
     img = np.expand_dims(img, axis=0)
@@ -114,7 +114,7 @@ if uploaded is not None:
     with col2:
         if st.button("🔍 Predict Medicine"):
 
-            # ✅ Dummy prediction (since no TensorFlow)
+            # ✅ Dummy prediction (NO TensorFlow)
             idx = 0
             medicine = str(classes[idx])
             confidence = 95.0
@@ -166,7 +166,7 @@ if uploaded is not None:
 st.markdown("---")
 st.markdown("### 🤖 Features")
 st.write("✔ AI-based medicine prediction")
-st.write("✔ CSV-based medicine database (80+ medicines)")
+st.write("✔ CSV-based medicine database")
 st.write("✔ Smart matching system")
 
 st.warning("⚠ For educational purposes only. Consult a doctor.")

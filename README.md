@@ -82,3 +82,9 @@ git clone https://github.com/HarithaBuddiga/AI-Prescription-Analyzer.git
 cd AI-Prescription-Analyzer
 Step 2: Run the application
 python -m streamlit run app.py
+
+# AI Prescription Analyzer
+
+🔗 Live App: https://ai-prescription-analyzer.onrender.com
+
+This project predicts medicines from prescription images and shows details.

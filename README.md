@@ -84,8 +84,7 @@ Step 2: Run the application
 python -m streamlit run app.py
 
 
-# 🩺 **AI Prescription Analyzer**
+🌐 Live Application  
 
-🚀 **Live Demo:** https://ai-prescription-analyzer.onrender.com
-
-AI-based system to predict medicines from prescription images.
+🔹 **Project Link**  
+🚀 https://ai-prescription-analyzer.onrender.com  

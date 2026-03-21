@@ -113,11 +113,10 @@ if uploaded is not None:
 
     with col2:
         if st.button("🔍 Predict Medicine"):
-
-            # ✅ Dummy prediction (NO TensorFlow)
-            idx = 0
+            pred = model.predict(img)
+            idx = int(np.argmax(pred))
             medicine = str(classes[idx])
-            confidence = 95.0
+            confidence = float(pred[0][idx]) * 100
 
             st.success(f"💊 {medicine}")
             st.info(f"📊 Confidence: {confidence:.2f}%")

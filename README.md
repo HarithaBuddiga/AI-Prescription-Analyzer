@@ -84,7 +84,3 @@ Step 2: Run the application
 python -m streamlit run app.py
 
 
-🌐 Live Application  
-
-🔹 **Project Link**  
-🚀 https://ai-prescription-analyzer.onrender.com  
